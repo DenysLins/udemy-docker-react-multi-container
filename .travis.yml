@@ -4,16 +4,16 @@ services:
   - docker
 
 before_install:
-  - docker build -t denyslins/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t denyslins/udemy-react-multi-client-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true denyslins/react-test npm test -- --coverage
+  - docker run -e CI=true denyslins/udemy-react-multi-client-test -- --coverage
 
 after_success:
-  - docker build -f denyslins/udemy-react-multi-client ./client
-  - docker build -f denyslins/udemy-react-multi-nginx ./nginx
-  - docker build -f denyslins/udemy-react-multi-server ./server
-  - docker build -f denyslins/udemy-react-multi-worker ./worker
+  - docker build -t denyslins/udemy-react-multi-client ./client
+  - docker build -t denyslins/udemy-react-multi-nginx ./nginx
+  - docker build -t denyslins/udemy-react-multi-server ./server
+  - docker build -t denyslins/udemy-react-multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push denyslins/udemy-react-multi-client
