@@ -17,9 +17,6 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    volumes:
-      - /app/node_modules
-      - ./client:/app
   api:
     depends_on:
       - redis
@@ -67,3 +64,4 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - 8080:80
+      - 8081:81
